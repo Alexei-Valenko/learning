@@ -6,9 +6,9 @@ class TraineesController < ApplicationController
     @trainer = Trainer.find(params[:trainer_id])
     @trainees = @trainer.trainees
     
-    @trainees.each do |t|
-      t.date = Event.joins(:trainees).order(:date).last
-    end
+    # @trainees.each do |t|
+    #   t.date = Event.joins(:trainees).order(:date).last
+    # end
     render json: { trainees: @trainees}
   end
 
