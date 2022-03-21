@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_21_082447) do
+ActiveRecord::Schema.define(version: 2022_03_21_113713) do
 
   create_table "events", force: :cascade do |t|
     t.datetime "date", null: false
@@ -21,9 +21,13 @@ ActiveRecord::Schema.define(version: 2022_03_21_082447) do
     t.index ["trainer_id"], name: "index_events_on_trainer_id"
   end
 
-  create_table "events_trainees", id: false, force: :cascade do |t|   # has_many_throught   , activemodel serializer
-    t.integer "event_id", null: false
-    t.integer "trainee_id", null: false
+  create_table "trainee_events", force: :cascade do |t|
+    t.integer "trainee_id"
+    t.integer "event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_trainee_events_on_event_id"
+    t.index ["trainee_id"], name: "index_trainee_events_on_trainee_id"
   end
 
   create_table "trainees", force: :cascade do |t|
