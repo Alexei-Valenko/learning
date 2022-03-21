@@ -5,11 +5,12 @@ class TraineesController < ApplicationController
   def index
     @trainer = Trainer.find(params[:trainer_id])
     @trainees = @trainer.trainees
-    
     # @trainees.each do |t|
-    #   t.date = Event.joins(:trainees).order(:date).last
+    #   t.date = t.events.order(:date).last  # TODO add JSON serialize   t.as_json ????  add new object and put all there???
     # end
     render json: { trainees: @trainees}
+
+
   end
 
   # GET /trainees/1 or /trainees/1.json
@@ -63,6 +64,10 @@ class TraineesController < ApplicationController
       format.html { redirect_to trainees_url, notice: "Trainee was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def default_seriaizer_options 
+    {root: false}
   end
 
   private
