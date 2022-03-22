@@ -25,7 +25,7 @@ class TraineesController < ApplicationController
 
   # POST /trainees or /trainees.json
   def create
-    @trainee = Trainee.new(trainee_params)
+    @trainee = Trainee.new(trainee_create_params)
 
     if @trainee.save
       render json: @trainee
@@ -62,6 +62,10 @@ class TraineesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def trainee_params
-      params.require(:trainee).permit(:name, :trainer_id)
-    end
+      params.require(:trainee).permit(:name, :trainer_id) 
+    end 
+    
+    def trainee_create_params
+    params.permit(:name, :trainer_id) 
+  end
 end
