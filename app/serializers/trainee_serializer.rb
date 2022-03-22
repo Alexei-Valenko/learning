@@ -1,5 +1,9 @@
 class TraineeSerializer < ActiveModel::Serializer
-  attributes :id :date
+  attributes :id, :name, :trainer_id, :last_event
   has_many :events 
-  embed :true
+  
+  def last_event
+    object.events.last
+  end
+  
 end

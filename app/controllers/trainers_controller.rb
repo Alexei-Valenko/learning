@@ -1,5 +1,7 @@
 class TrainersController < ApplicationController
   
+  before_action :set_trainer, only: %i[ show update destroy ]
+
    # GET /trainers or /trainers.json
   def index
         @trainers = Trainer.all
@@ -8,45 +10,36 @@ class TrainersController < ApplicationController
 
 # GET /trainers/1 or /trainers/1.json
   def show
-    @trainer = Trainer.find(params[:id])  
-    render json: { trainer: @trainer}
+    render json: @trainer
   end
 
   # POST /trainers or /trainees.json
   def create
     @trainer = Trainer.new(trainer_params) 
 
-    respond_to do |format|
-      if @trainer.save
-        format.json { render :show, status: :created, location: @trainer }
-      else
-        format.json { render json: @trainer.errors, status: :unprocessable_entity }
-      end
+    if @trainer.save
+      render json: @trainer
+    else
+      render json: @trainer.errors, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /trainers/1 or /trainers/1.json
   def update
-    respond_to do |format|
-      if @trainer.update(trainer_params)
-        format.json { render :show, status: :ok, location: @trainer }
-      else
-        format.json { render json: @trainer.errors, status: :unprocessable_entity }
-      end
+    if @trainer.update(trainer_params)
+      render json: @trainer
+    else
+      render json: @trainer.errors, status: :unprocessable_entity
     end
   end
 
   # DELETE /trainers/1 or /trainers/1.json
   def destroy
+    #Trainee.where(trainer_id: params[:id]).destroy_all
+    @trainer.trainees.destroy_all
+    @trainer.destroy    
 
-    Trainee.where(trainer_id: params[:id]).destroy_all
-
-    @trainer.destroy
-    
-
-    respond_to do |format|
-      format.json { head :no_content }
-    end
+    render json: {"head" => :no_content}   
   end
 
   private

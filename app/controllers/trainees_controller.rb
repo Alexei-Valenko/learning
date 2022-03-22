@@ -5,18 +5,13 @@ class TraineesController < ApplicationController
   def index
     @trainer = Trainer.find(params[:trainer_id])
     @trainees = @trainer.trainees
-    # @trainees.each do |t|
-    #   t.date = t.events.order(:date).last  # TODO add JSON serialize   t.as_json ????  add new object and put all there???
-    # end
-    render json: { trainees: @trainees}
-
-
+    render json:  @trainees, each_serializer: TraineesSerializer
   end
 
   # GET /trainees/1 or /trainees/1.json
   def show
     @trainee = Trainee.find(params[:id])
-    render json: { events: @trainee}
+    render json: @trainee
   end
 
   # GET /trainees/new
@@ -32,38 +27,27 @@ class TraineesController < ApplicationController
   def create
     @trainee = Trainee.new(trainee_params)
 
-    respond_to do |format|
-      if @trainee.save
-        format.html { redirect_to trainee_url(@trainee), notice: "Trainee was successfully created." }
-        format.json { render :show, status: :created, location: @trainee }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @trainee.errors, status: :unprocessable_entity }
-      end
+    if @trainee.save
+      render json: @trainee
+    else
+      render json: @trainee.errors, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /trainees/1 or /trainees/1.json
   def update
-    respond_to do |format|
-      if @trainee.update(trainee_params)
-        format.html { redirect_to trainee_url(@trainee), notice: "Trainee was successfully updated." }
-        format.json { render :show, status: :ok, location: @trainee }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @trainee.errors, status: :unprocessable_entity }
-      end
+    if @trainer.update(trainer_params)
+      render json: @trainee
+    else
+      render json: @trainee.errors, status: :unprocessable_entity
     end
   end
 
   # DELETE /trainees/1 or /trainees/1.json
   def destroy
     @trainee.destroy
-
-    respond_to do |format|
-      format.html { redirect_to trainees_url, notice: "Trainee was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    
+    render json: {"head" => :no_content}
   end
 
   def default_seriaizer_options 
