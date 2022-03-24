@@ -1,3 +1,5 @@
+require 'date'
+
 class EventsController < ApplicationController
   before_action :set_event, only: %i[ show edit update destroy ]
 
@@ -18,6 +20,10 @@ class EventsController < ApplicationController
 
 # POST 
   def create
+    if event_create_params['date']  < Date.now.to_time 
+      return render json: {events: 'old'} 
+    end
+
     @event = Event.new(event_create_params)
 
     if @event.save
@@ -55,6 +61,7 @@ class EventsController < ApplicationController
     end
 
     def event_create_params
+
         params.permit(:date, :length, :trainer_id)
       end
 end

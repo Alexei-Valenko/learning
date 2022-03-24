@@ -24,7 +24,8 @@
         <!-- </div> -->
         <br>
         <button v-if="addingNew == false" v-on:click="addEvent"> Add New Event </button>
-        <div v-else>
+        <div v-else>        
+            <h2 style="color:red"> {{msg}} </h2>
             <strong> Enter New Event</strong>
             <input type="text" placeholder="Enter date(YYYY-MM-DD)" v-model="inputDate"/>
             <input type="text" placeholder="Enter hour" v-model="inputHour"/>
@@ -47,7 +48,8 @@ export default {
             inputDate: '',
             inputHour: '',
             inputLength: '',
-            showEventProperties: false
+            showEventProperties: false,
+            msg: ''
         }
     },
     methods: {
@@ -61,14 +63,20 @@ export default {
                 .then(
                     response => {
                         console.log(response.data);
-                        this.update();
+                        if(response.data.events == 'old') {
+                            this.msg = ' New event can not be in the past.'
+                        }
+                        else {                            
+                            this.msg = '';
+                            this.update();                            
+                            this.addingNew = false;            
+                            this.inputDate = '';
+                            this.inputHour = '';
+                            this.inputLength = '';
+                        }
                     },
                      error => console.log(error)
                 );
-             this.addingNew = false;            
-             this.inputDate = '';
-             this.inputHour = '';
-             this.inputLength = '';
 
         },
 
