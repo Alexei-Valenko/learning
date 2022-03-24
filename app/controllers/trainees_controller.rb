@@ -3,9 +3,14 @@ class TraineesController < ApplicationController
 
   # GET /trainees or /trainees.json
   def index
-    @trainer = Trainer.find(params[:trainer_id])
-    @trainees = @trainer.trainees
-    render json:  @trainees, each_serializer: TraineesSerializer
+    
+    @trainer = Trainer.where(id:params[:trainer_id]).first  
+    if @trainer.nil?
+      render json: {error: "no trainer"}, status: :unprocessable_entity
+    else
+      @trainees = @trainer.trainees
+      render json:  @trainees, each_serializer: TraineesSerializer
+    end
   end
 
   # GET /trainees/1 or /trainees/1.json
@@ -36,7 +41,7 @@ class TraineesController < ApplicationController
 
   # PATCH/PUT /trainees/1 or /trainees/1.json
   def update
-    if @trainer.update(trainer_params)
+    if @trainee.update(trainee_params)
       render json: @trainee
     else
       render json: @trainee.errors, status: :unprocessable_entity

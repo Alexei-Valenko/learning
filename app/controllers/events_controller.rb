@@ -2,9 +2,13 @@ class EventsController < ApplicationController
   before_action :set_event, only: %i[ show edit update destroy ]
 
   def index
-    @trainer = Trainer.find(params[:trainer_id])
-    @events = @trainer.event
-    render json: { events: @events}
+    @trainer = Trainer.where(id:params[:trainer_id]).first
+    if @trainer.nil?
+      render json: {error: "no trainer"}, status: :unprocessable_entity
+    else
+        @events = @trainer.events
+        render json: { events: @events}
+    end
   end
 
   def show
@@ -14,7 +18,7 @@ class EventsController < ApplicationController
 
 # POST 
   def create
-    @event = Event.new(event_params)
+    @event = Event.new(event_create_params)
 
     if @event.save
         render json: @event
@@ -47,11 +51,11 @@ class EventsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def event_params
-        params.require(:event).permit(:date, :hour, :length, :trainer_id)
+        params.require(:event).permit(:date, :length, :trainer_id)
     end
 
     def event_create_params
-        params.permit(:date, :hour, :length, :trainer_id)
+        params.permit(:date, :length, :trainer_id)
       end
 end
 

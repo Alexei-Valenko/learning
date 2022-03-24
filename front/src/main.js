@@ -7,27 +7,29 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 import Login from './Login.vue';
 import Trainer from './Trainer.vue';
-import Trainee from './Trainee.vue';
 import Events from './Events.vue';
+import EventProperties from './EventProperties.vue';
+import Trainee from './Trainee.vue';
+import TraineeProperties from './TraineeProperties.vue';
 
 Vue.use(VueRouter);
 Vue.use(VueAxios, axios);
 
+
 const router = new VueRouter({
   routes: [
-    { path: '', name: 'login', component:Login },
-    { path: '/trainers/:trainerId', name:'trainer', component: Trainer },
-    { path: '/:trainerId/trainee', name:'trainee', component: Trainer },
-    { path: '/:trainerId/events', name:'events', component: Events },
+    { path: '/', component:Trainer },
+    { path: '/login', component:Login },
+    { path: '/events', component: Events },
+    { path: '/eventProperties', component: EventProperties },
+    { path: '/trainees', component: Trainee },
+    { path: '/traineeProperties', component: TraineeProperties },
   ],
   mode: 'history', 
 });
 
-// Vue.http.options.root = 'http://localhost:3000';
-// Vue.http.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
 new Vue({
   el: '#app',
   render: h => h(App),
- router: router
+  router: router
 })

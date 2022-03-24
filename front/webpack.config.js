@@ -8,6 +8,23 @@ module.exports = {
     publicPath: '/dist/',
     filename: 'build.js'
   },
+  devServer: {
+    historyApiFallback: true,
+    // noInfo: true,
+    overlay: true,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        pathRewrite: { '^/api': '' },
+        // bypass: function (req, res, proxyOptions) {
+        //   if (req.headers.accept.indexOf('html') !== -1) {
+        //     console.log('Skipping proxy for browser request.');
+        //     return '/index.html';
+        //   }
+        // },
+      },
+    },
+  },
   module: {
     rules: [
       {
@@ -75,15 +92,11 @@ module.exports = {
     },
     extensions: ['*', '.js', '.vue', '.json']
   },
-  devServer: {
-    historyApiFallback: true,
-    noInfo: true,
-    overlay: true
-  },
+
   performance: {
     hints: false
   },
-  devtool: '#eval-source-map'
+  devtool: 'eval-source-map'
 }
 
 if (process.env.NODE_ENV === 'production') {
