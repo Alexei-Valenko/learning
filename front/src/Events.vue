@@ -1,6 +1,7 @@
 <template>
     <div>
         <router-link to="/"  active-class="active">Back to Trainer</router-link>
+       
         <h1>Table of events</h1>
         <table>
             <tr> 

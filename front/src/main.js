@@ -18,7 +18,7 @@ Vue.use(VueAxios, axios);
 
 const router = new VueRouter({
   routes: [
-    { path: '/', component:Trainer },
+    { path: '/', component:Trainer , children: [ {path: 'eventsInline', component: Events}]},
     { path: '/login', component:Login },
     { path: '/events', component: Events },
     { path: '/eventProperties', component: EventProperties },
