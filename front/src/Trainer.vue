@@ -7,8 +7,7 @@
             <router-link to="/events"  active-class="active">Show all events</router-link>
             <router-link to="/eventsInline"  active-class="active">Show all events inline</router-link>
 
-            
-                 <router-view></router-view>
+            <router-view></router-view>
         </div>
 
         

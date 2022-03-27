@@ -102,14 +102,11 @@ export default {
             this.trainerId =  localStorage.getItem("trainerId");
             this.axios.get('/api/events?trainer_id=' + this.trainerId) 
                 .then(
-                    response => {          
-                        console.log(response);          
+                    response => {                   
                         this.events = response.data.events; 
                         this.events.forEach( item => {
                             if(item.date !== undefined) {
-                                console.log(item.date);
                                 const date = new Date(item.date);
-                                console.log(date);
                                 item.date = date.getUTCFullYear() + '-' + (date.getUTCMonth() + 1 ) + '-' + date.getUTCDate();
                                 item.hour = date.getUTCHours();
                             }

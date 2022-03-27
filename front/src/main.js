@@ -10,7 +10,6 @@ import Trainer from './Trainer.vue';
 import Events from './Events.vue';
 import EventProperties from './EventProperties.vue';
 import Trainee from './Trainee.vue';
-import TraineeProperties from './TraineeProperties.vue';
 
 Vue.use(VueRouter);
 Vue.use(VueAxios, axios);
@@ -22,8 +21,7 @@ const router = new VueRouter({
     { path: '/login', component:Login },
     { path: '/events', component: Events },
     { path: '/eventProperties', component: EventProperties },
-    { path: '/trainees', component: Trainee },
-    { path: '/traineeProperties', component: TraineeProperties },
+    { path: '/trainees', component: Trainee }
   ],
   mode: 'history', 
 });
