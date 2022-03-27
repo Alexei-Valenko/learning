@@ -49,7 +49,8 @@ export default {
         },
 
         deleteTrainer(index) {
-            this.axios.delete(`/api/trainers/` + this.trainers[index].id)
+            if(confirm("Do you really want to delete?")){
+               this.axios.delete(`/api/trainers/` + this.trainers[index].id)
                 .then(
                     response => {
                         console.log(response);
@@ -57,6 +58,7 @@ export default {
                     },
                      error => console.log(error)
                 );
+            }            
         }
     },
 
