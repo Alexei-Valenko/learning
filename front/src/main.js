@@ -14,7 +14,6 @@ import Trainee from './Trainee.vue';
 Vue.use(VueRouter);
 Vue.use(VueAxios, axios);
 
-
 const router = new VueRouter({
   routes: [
     { path: '/', component:Trainer , children: [ {path: 'eventsInline', component: Events}]},

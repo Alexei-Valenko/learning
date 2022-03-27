@@ -42,8 +42,6 @@ class TraineesController < ApplicationController
   # PATCH/PUT /trainees/1 or /trainees/1.json
   def update
    if not params[:event_id].nil?
-      puts params[:event_id]
-      puts params[:id]
       @trainee_event = TraineeEvent.new({ "trainee_id" => params[:id], "event_id" => params[:event_id]})
 
       if @trainee_event.save

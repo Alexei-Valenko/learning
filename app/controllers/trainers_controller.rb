@@ -35,7 +35,6 @@ class TrainersController < ApplicationController
 
   # DELETE /trainers/1 or /trainers/1.json
   def destroy
-    #Trainee.where(trainer_id: params[:id]).destroy_all
     @trainer.trainees.destroy_all
     @trainer.destroy    
 

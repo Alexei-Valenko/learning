@@ -9,7 +9,6 @@
 
             <router-view></router-view>
         </div>
-
         
         <router-link v-else to="/login" active-class="active"  v-on:logged="logged">Login</router-link>    
     </div>

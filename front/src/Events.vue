@@ -16,13 +16,13 @@
             </tr>
         </table>
         <br>
-        <!-- <div v-on:hide-event-properties="hideProperties"> -->
-            <eventProperties 
-                v-if="currentEvent !== undefined && showEventProperties == true" 
-                v-bind:event="currentEvent"  
-                v-on:hide-event-properties="hideProperties"
-                v-on:updated='update'></eventProperties>
-        <!-- </div> -->
+        
+        <eventProperties 
+            v-if="currentEvent !== undefined && showEventProperties == true" 
+            v-bind:event="currentEvent"  
+            v-on:hide-event-properties="hideProperties"
+            v-on:updated='update'></eventProperties>
+    
         <br>
         <button v-if="addingNew == false" v-on:click="addEvent"> Add New Event </button>
         <div v-else>        
@@ -58,12 +58,10 @@ export default {
             this.addingNew = true;            
         },
 
-        submit() {
-            
+        submit() {            
              this.axios.post(`/api/events`, { date: this.inputDate + 'T' + this.inputHour + ':00:00Z' , length: this.inputLength, trainer_id:  this.trainerId})
                 .then(
                     response => {
-                        console.log(response.data);
                         if(response.data.events == 'old') {
                             this.msg = ' New event can not be in the past.'
                         }
@@ -78,7 +76,6 @@ export default {
                     },
                      error => console.log(error)
                 );
-
         },
 
         cancel() {

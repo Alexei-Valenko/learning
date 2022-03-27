@@ -28,12 +28,9 @@ export default {
     },
     methods: {
         addTrainer( ) { 
-
             this.axios.post(`/api/trainers/`, { name: this.inputName})
                 .then(
                     response => {
-                        console.log(response);
-                        
                         this.trainers.push(response.data);
                         this.inputName = '';
                     },
