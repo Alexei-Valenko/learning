@@ -62,7 +62,8 @@ export default {
              this.axios.post(`/api/events`, { date: this.inputDate + 'T' + this.inputHour + ':00:00Z' , length: this.inputLength, trainer_id:  this.trainerId})
                 .then(
                     response => {
-                        if(response.data.events == 'old') {
+                        console.log(response);
+                        if(response.data.error != undefined && response.data.error.date[0].includes("can't be in the past")) {
                             this.msg = ' New event can not be in the past.'
                         }
                         else {                            
@@ -74,7 +75,8 @@ export default {
                             this.inputLength = '';
                         }
                     },
-                     error => console.log(error)
+                     error => {
+                         console.log(error);}
                 );
         },
 

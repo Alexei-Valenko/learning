@@ -1,4 +1,4 @@
-require 'time'
+#require 'time'
 
 class EventsController < ApplicationController
   before_action :set_event, only: %i[ show edit update destroy ]
@@ -18,16 +18,18 @@ class EventsController < ApplicationController
     render json: { events: @events}
   end
 
+  def new
+    @event = Event.new
+  end
+
 # POST 
   def create
-    return render json: {events: 'old'} if event_create_params['date'].to_time  < Time.now
-
     @event = Event.new(event_create_params)
 
     if @event.save
         render json: @event
       else
-        render json: @trainee.errors, status: :unprocessable_entity
+        render json: { error: @event.errors}  #, status: :unprocessable_entity
       end
   end
 

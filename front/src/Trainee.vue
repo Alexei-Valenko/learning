@@ -84,8 +84,7 @@ export default {
                 )    
         },
 
-        saveEvent() {    
-            console.log(this.currentTrainee.id, this.currentEvent);        
+        saveEvent() {           
              this.axios.put(`/api/trainees/` + this.currentTrainee.id, { event_id: this.currentEvent, trainer_id:  this.trainerId})
                 .then(
                     response => {

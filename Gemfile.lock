@@ -204,6 +204,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers
+  activemodel
   bootsnap (>= 1.1.0)
   byebug
   capybara (>= 2.15)

@@ -49,8 +49,7 @@ export default {
             if(confirm("Do you really want to delete?")){
                this.axios.delete(`/api/trainers/` + this.trainers[index].id)
                 .then(
-                    response => {
-                        console.log(response);
+                    response => { 
                         this.trainers.splice(index, 1);
                     },
                      error => console.log(error)

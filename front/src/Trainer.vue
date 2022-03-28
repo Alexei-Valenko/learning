@@ -36,17 +36,11 @@ export default {
         logged() {
             this.trainerIndex = localStorage.getItem('trainerId');
             this.trainerName = localStorage.getItem('trainerName');
-            console.log(this.trainerName);
         }
     } ,
     mounted() {
         this.trainerIndex = localStorage.getItem('trainerId');
         this.trainerName = localStorage.getItem('trainerName');
-        console.log(this.trainerName);
-        this.$watch(() => this.$route.params,
-             (toParams, previousParams) => {
-                console.log(toParams, previousParams);
-            })
     },
     components: { Trainee, Events }
 }
