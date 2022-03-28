@@ -29,7 +29,7 @@ class EventsController < ApplicationController
     if @event.save
         render json: @event
       else
-        render json: { error: @event.errors}  #, status: :unprocessable_entity
+        render json: { error: @event.errors}
       end
   end
 
