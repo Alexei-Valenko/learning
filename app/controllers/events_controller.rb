@@ -38,7 +38,7 @@ class EventsController < ApplicationController
     if @event.update(event_params)
         render json: @event
       else
-        render json: @trainee.errors, status: :unprocessable_entity
+        render json: @event.errors, status: :unprocessable_entity
       end
   end
 
